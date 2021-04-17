@@ -1,0 +1,50 @@
+#Install Jenkins
+yum install ntp ntpdate ntp-doc
+chkconfig ntpd on
+ntpdate pool.ntp.org
+/etc/init.d/ntpd start
+vi /etc/ntp.conf
+
+yum install java-1.7.0-openjdk
+yum install wget -y
+sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
+sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
+sudo yum install jenkins
+chkconfig jenkins on
+service jenkins start/stop/restart
+vi /etc/sysconfig/iptables
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 8080 -j ACCEPT
+service iptables restart
+
+wget https://bootstrap.pypa.io/get-pip.py
+pip install get-pip.py
+pip install virtualenv
+mkdir /var/lib/jenkins/.virtualenvs
+cd /var/lib/jenkins/.virtualenvs
+virtualenv python2.6
+#virtualenv -p /usr/bin/python2.6 <path/to/new/virtualenv/>
+. python2.6/bin/activate
+pip install xmlrunner
+pip install unittest2
+#import unittest2 as unittest
+pip install coverage ***
+
+http://192.168.56.3:8080
+administrar jenkins
+administrar plugins
+instalar git plugin
+instalar violations plugin
+instalar cobertura plugin
+instalar html publisher plugin (esta fallando)
+
+#Respuestas
+set -e = termina inmediatamente si algun comando produce un error
+python -m = permite ejecutar un modulo como script
+git update-index --chmod=+x run_tests.sh = cambia permisos de un archivo
+git ls-files --stage
+
+#Links
+https://wiki.jenkins-ci.org/display/JENKINS/Installing+Jenkins+on+Red+Hat+distributions#InstallingJenkinsonRedHatdistributions-ImportantNoteonCentOSJava
+https://www.youtube.com/watch?v=iGtM_OP01FU
+https://github.com/d4n13lbc/pystache.git
+https://github.com/d4n13lbc/pystache
